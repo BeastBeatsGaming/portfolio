@@ -1,0 +1,310 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+body {
+  background: #0F0F0C;
+  color: #D4A026;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(212, 160, 38, 0.25);
+  color: #F5C842;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #0F0F0C; }
+::-webkit-scrollbar-thumb { background: rgba(212, 160, 38, 0.2); }
+
+/* ── Keyframes ── */
+
+@keyframes pulse-dim {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes edge-sweep {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(500%); }
+}
+
+@keyframes whack-pulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(212, 160, 38, 0.2), inset 0 0 20px rgba(212, 160, 38, 0.02); }
+  50%       { box-shadow: 0 0 28px rgba(212, 160, 38, 0.55), inset 0 0 30px rgba(212, 160, 38, 0.06); }
+}
+
+@keyframes crt-flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.96; }
+  94% { opacity: 1; }
+  96% { opacity: 0.98; }
+  97% { opacity: 1; }
+}
+
+/* ── CRT ── */
+
+.crt-active {
+  animation: crt-flicker 8s infinite;
+}
+
+/* ── HUD Nav ── */
+
+.hud-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  padding: 16px 24px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  background: linear-gradient(180deg, rgba(10, 10, 8, 0.95) 0%, transparent 100%);
+}
+
+.hud-nav a {
+  color: rgba(212, 160, 38, 0.4);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.3s;
+  cursor: pointer;
+  letter-spacing: 2px;
+}
+
+.hud-nav a:hover,
+.hud-nav a.active {
+  color: #F5C842;
+}
+
+.nav-char {
+  display: inline-block;
+}
+
+/* ── Edge lines ── */
+
+.edge-line {
+  position: fixed;
+  top: 0; bottom: 0;
+  width: 1px;
+  z-index: 50;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(212, 160, 38, 0.08) 15%,
+    rgba(212, 160, 38, 0.08) 85%,
+    transparent 100%
+  );
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.edge-line-left  { left: 16px; }
+.edge-line-right { right: 16px; }
+
+.edge-sweep {
+  position: absolute;
+  left: 0; right: 0;
+  height: 25%;
+  background: linear-gradient(180deg, transparent, rgba(212, 160, 38, 0.45), transparent);
+  animation: edge-sweep 6s linear infinite;
+  pointer-events: none;
+}
+
+/* ── Project cards ── */
+
+.project-card {
+  position: relative;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.project-card:hover {
+  background: rgba(212, 160, 38, 0.08) !important;
+  border-color: rgba(212, 160, 38, 0.5) !important;
+  transform: translateY(-4px);
+}
+
+.project-card-inner {
+  position: relative;
+}
+
+.project-title {
+  transition: color 0.25s ease;
+}
+
+.project-card:hover .project-title {
+  color: #F5C842 !important;
+}
+
+.project-cta-btn {
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+
+.project-card:hover .project-cta-btn {
+  border-color: #F5C842 !important;
+  color: #F5C842 !important;
+}
+
+.project-cta-btn:active {
+  background: rgba(212, 160, 38, 0.15) !important;
+  border-color: #F5C842 !important;
+  color: #F5C842 !important;
+  transition: none;
+}
+
+.thumbnail-hatch {
+  transition: transform 0.35s ease;
+}
+
+.project-card:hover .thumbnail-hatch {
+  transform: skewX(-2deg) scaleX(1.02);
+}
+
+/* ── Skill tag hover ── */
+
+.skill-tag {
+  cursor: default;
+  transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.skill-tag:hover {
+  border-color: rgba(212, 160, 38, 0.5) !important;
+  color: #F5C842 !important;
+  box-shadow: 0 0 8px rgba(212, 160, 38, 0.3);
+}
+
+/* ── Whack A Mole standout ── */
+
+.whack-card {
+  animation: whack-pulse 2.5s ease-in-out infinite;
+}
+
+/* ── Skills scanner ── */
+
+.skills-scanner {
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 160, 38, 0.6), transparent);
+  pointer-events: none;
+  top: 0;
+  opacity: 0;
+  z-index: 5;
+}
+
+/* ── Social links scan-in ── */
+
+.social-link {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  transition: color 0.3s;
+}
+
+.social-link::after {
+  content: '';
+  position: absolute;
+  left: -120%;
+  top: 0; bottom: 0;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, rgba(212, 160, 38, 0.3), transparent);
+  transition: left 0.45s ease;
+}
+
+.social-link:hover {
+  color: #F5C842;
+}
+
+.social-link:hover::after {
+  left: 120%;
+}
+
+/* ── Transmit button ── */
+
+.transmit-btn {
+  padding: 14px 32px;
+  background: transparent;
+  border: 1px solid #D4A026;
+  color: #D4A026;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+  align-self: flex-start;
+  position: relative;
+  overflow: hidden;
+}
+
+.transmit-btn:hover {
+  background: rgba(212, 160, 38, 0.15);
+  color: #F5C842;
+  border-color: #F5C842;
+}
+
+.transmit-progress {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  background: rgba(212, 160, 38, 0.15);
+  width: 0%;
+  transition: none;
+  pointer-events: none;
+}
+
+/* ── Floating data points ── */
+
+.float-point {
+  position: absolute;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: rgba(212, 160, 38, 0.25);
+  pointer-events: none;
+  white-space: nowrap;
+  opacity: 0;
+}
+
+/* ── Scroll snap section ── */
+
+.snap-section {
+  height: 100vh;
+  overflow: hidden;
+  scroll-snap-align: start;
+  position: relative;
+}
+
+/* ── Form placeholder ── */
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(212, 160, 38, 0.35);
+}
+
+/* ── Boot flash ── */
+
+.boot-flash {
+  position: fixed;
+  inset: 0;
+  background: rgba(212, 160, 38, 0.06);
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+}
