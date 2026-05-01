@@ -5,7 +5,7 @@ import { CornerBrackets, SectionHeader, HUDDivider, colors } from './HUDElements
 
 const STATS = [
   { label: 'CLASS',  value: 'Game Dev / Web Dev' },
-  { label: 'LEVEL',  value: 'Student — Final Year' },
+  { label: 'LEVEL',  value: 'Fresher' },
   { label: 'REGION', value: 'Chennai, India' },
   { label: 'STATUS', value: 'Open to Opportunities', highlight: true },
 ];

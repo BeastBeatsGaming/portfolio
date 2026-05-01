@@ -12,12 +12,12 @@ const CONTACT_DETAILS = [
   {
     label: '[ LINKEDIN ]',
     value: 'linkedin.com/in/sai-mayank',
-    href: 'https://linkedin.com/in/',
+    href: 'https://www.linkedin.com/in/sai-mayank/',
   },
   {
     label: '[ GITHUB ]',
-    value: 'github.com/saimayank',
-    href: 'https://github.com/',
+    value: 'github.com/BeastBeatsGaming',
+    href: 'https://github.com/BeastBeatsGaming',
   },
 ];
 

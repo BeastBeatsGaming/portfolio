@@ -129,18 +129,25 @@ body {
 
 .project-card {
   position: relative;
+  overflow: hidden;
+  height: 280px;
   cursor: pointer;
-  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+  transition: border-color 0.25s ease, transform 0.25s ease;
 }
 
 .project-card:hover {
-  background: rgba(212, 160, 38, 0.08) !important;
   border-color: rgba(212, 160, 38, 0.5) !important;
   transform: translateY(-4px);
 }
 
 .project-card-inner {
   position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 16px;
+  background: linear-gradient(to bottom, rgba(10, 10, 8, 0.75) 0%, rgba(10, 10, 8, 0.92) 100%);
 }
 
 .project-title {
@@ -165,14 +172,6 @@ body {
   border-color: #F5C842 !important;
   color: #F5C842 !important;
   transition: none;
-}
-
-.thumbnail-hatch {
-  transition: transform 0.35s ease;
-}
-
-.project-card:hover .thumbnail-hatch {
-  transform: skewX(-2deg) scaleX(1.02);
 }
 
 /* ── Skill tag hover ── */

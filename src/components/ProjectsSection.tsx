@@ -3,11 +3,19 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SectionHeader, colors } from './HUDElements';
 
+import chargeItImg      from '../images/ChargeIt/one.png';
+import idleImg          from '../images/Idle/image.png';
+import whackImg         from '../images/WhackAMole/one.png';
+import saranImg         from '../images/Saran/One.png';
+import valorantImg      from '../images/ValorantDatabase/one.png';
+import taskMasterImg    from '../images/TaskMaster/one.png';
+
 interface Project {
   title: string;
   category: 'field' | 'web';
   tags: string[];
   description: string;
+  image: string;
   link?: string;
   standout?: boolean;
 }
@@ -18,20 +26,23 @@ const PROJECTS: Project[] = [
     category: 'field',
     tags: ['Unity', 'C#'],
     description: 'Endless runner where you play as a charger that must collect electricity and dodge wire-cutters to power a phone.',
-    link: '',
+    image: chargeItImg,
+    link: 'https://sai-mayank.itch.io/charge-it',
   },
   {
     title: 'Idle Business Manager',
     category: 'field',
     tags: ['Unity', 'C#'],
     description: 'Casual idle tycoon — build a business empire by investing in ventures, upgrading operations, and automating income.',
-    link: '',
+    image: idleImg,
+    link: 'https://sai-mayank.itch.io/idle-business-manager',
   },
   {
     title: 'Whack A Mole',
     category: 'field',
     tags: ['Unity', 'C#', 'TensorFlow'],
     description: 'Reimagined with motion tracking. Uses a webcam to detect hand movements so players physically "whack" the moles.',
+    image: whackImg,
     link: '',
     standout: true,
   },
@@ -40,6 +51,7 @@ const PROJECTS: Project[] = [
     category: 'web',
     tags: ['HTML', 'CSS', 'JavaScript'],
     description: 'Frontend website for a cab booking service with interactive UI components.',
+    image: saranImg,
     link: '',
   },
   {
@@ -47,14 +59,16 @@ const PROJECTS: Project[] = [
     category: 'web',
     tags: ['Next.js', 'Axios'],
     description: 'Frontend app that fetches live data from the Valorant API — agents, weapons, maps, and cosmetics.',
-    link: '',
+    image: valorantImg,
+    link: 'https://github.com/BeastBeatsGaming/Valorant-Database',
   },
   {
     title: 'Task Master',
     category: 'web',
     tags: ['React', 'Node.js', 'MongoDB', 'Express'],
-    description: 'Full-stack task manager with real-time updates, user authentication, and a responsive UI.',
-    link: '',
+    description: 'Full-stack task and project manager with real-time updates, user authentication, and a responsive UI.',
+    image: taskMasterImg,
+    link: 'https://github.com/BeastBeatsGaming/Task-Master',
   },
 ];
 
@@ -62,19 +76,29 @@ interface CardProps extends Project {
   index: number;
 }
 
-function ProjectCard({ title, category, tags, description, link, standout, index }: CardProps) {
+function ProjectCard({ title, category, tags, description, image, link, standout, index }: CardProps) {
   const catIcon  = category === 'field' ? '◆' : '▪';
   const catLabel = category === 'field' ? 'FIELD MISSION' : 'ENGINEERING OPS';
 
   return (
     <div
       className={`project-card${standout ? ' whack-card' : ''}`}
-      style={{
-        background: colors.bgPanel,
-        border: `1px solid ${colors.border}`,
-        padding: 16,
-      }}
+      style={{ border: `1px solid ${colors.border}` }}
     >
+      {/* Grayscale image — fills card absolutely */}
+      <img
+        src={image}
+        alt={title}
+        style={{
+          position: 'absolute', inset: 0,
+          width: '100%', height: '100%',
+          objectFit: 'cover',
+          filter: 'grayscale(100%)',
+          zIndex: 0,
+        }}
+      />
+
+      {/* Content — flex column over gradient overlay */}
       <div className="project-card-inner">
         {/* Index */}
         <div style={{
@@ -85,8 +109,9 @@ function ProjectCard({ title, category, tags, description, link, standout, index
 
         {/* Category */}
         <div style={{
-          fontFamily: "'Share Tech Mono', monospace", fontSize: 10,
-          letterSpacing: '2px', color: colors.amberDim, marginBottom: 8,
+          fontFamily: "'Share Tech Mono', monospace", fontSize: 11,
+          letterSpacing: '2px', color: colors.amberDim,
+          marginBottom: 6, flexShrink: 0,
         }}>{catIcon} {catLabel}</div>
 
         {/* Title */}
@@ -94,23 +119,28 @@ function ProjectCard({ title, category, tags, description, link, standout, index
           fontFamily: "'Rajdhani', sans-serif", fontSize: 18, fontWeight: 600,
           letterSpacing: '2px', textTransform: 'uppercase',
           color: colors.text,
-          margin: '0 0 6px',
+          margin: '0 0 8px', flexShrink: 0,
         }}>{title}</h3>
 
-        {/* Description */}
+        {/* Description — fills remaining space, clips overflow */}
         <p style={{
-          fontFamily: "'Share Tech Mono', monospace", fontSize: 11,
-          color: colors.amberDim, lineHeight: 1.55, margin: '0 0 10px',
+          fontFamily: "'Share Tech Mono', monospace", fontSize: 13,
+          color: colors.text, lineHeight: 1.6, margin: 0,
+          flex: 1, overflow: 'hidden',
         }}>{description}</p>
 
-        {/* Tags */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginBottom: 12 }}>
+        {/* Tags — pinned to bottom */}
+        <div style={{
+          display: 'flex', flexWrap: 'wrap', gap: 6,
+          marginTop: 'auto', paddingTop: 10,
+        }}>
           {tags.map((t, i) => (
             <span key={i} style={{
-              fontFamily: "'Share Tech Mono', monospace", fontSize: 9,
-              letterSpacing: '1px', color: colors.amberDim,
-              border: `1px solid ${colors.border}`,
-              padding: '2px 6px',
+              fontFamily: "'Share Tech Mono', monospace", fontSize: 12,
+              letterSpacing: '1px', color: colors.amberLight,
+              border: '1px solid rgba(212, 160, 38, 0.4)',
+              background: 'rgba(10, 10, 8, 0.6)',
+              padding: '5px 12px',
             }}>{t}</span>
           ))}
         </div>
@@ -123,13 +153,15 @@ function ProjectCard({ title, category, tags, description, link, standout, index
             if (link) window.open(link, '_blank', 'noopener,noreferrer');
           }}
           style={{
+            position: 'relative', zIndex: 10, pointerEvents: 'all',
+            marginTop: 10, alignSelf: 'flex-start',
             background: 'transparent',
             border: `1px solid ${colors.amberDim}`,
             color: colors.amberDim,
             fontFamily: "'Rajdhani', sans-serif",
-            fontSize: 11, fontWeight: 600,
+            fontSize: 12, fontWeight: 600,
             letterSpacing: '2px', textTransform: 'uppercase',
-            padding: '6px 14px',
+            padding: '8px 16px',
             cursor: 'pointer',
           }}
         >[ VIEW PROJECT ]</button>
