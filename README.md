@@ -1,30 +1,11 @@
 # Sai Mayank — Portfolio
 
-Game HUD / Diegetic UI portfolio. Built with React + Vite + GSAP.
+My personal portfolio, as a game dev student and web developer.
 
-## Dev
+Built with a **Game HUD / Diegetic UI** aesthetic — amber on near-black, designed to feel like a heads-up display.
 
-```bash
-npm install
-npm run dev
-```
+**Live site:** [saimayank.github.io/portfolio](https://saimayank.github.io/portfolio)
 
-## Build
+## Built With
 
-```bash
-npm run build
-# Output in /docs — ready for GitHub Pages
-```
-
-## Deploy (GitHub Pages)
-
-1. Push the `/docs` folder to your repo
-2. In repo Settings → Pages → Source: `Deploy from a branch` → branch: `main`, folder: `/docs`
-3. Site will be live at `https://<username>.github.io/My-Portfolio/`
-
-## Stack
-
-- React 18 + TypeScript
-- Vite (base: `/My-Portfolio/`, outDir: `docs`)
-- GSAP + ScrollTrigger — all scroll and entrance animations
-- Google Fonts: Rajdhani + Share Tech Mono
+React · TypeScript · Vite · GSAP
